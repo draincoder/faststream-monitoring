@@ -1,4 +1,4 @@
-from pyproject import __version__
+from exchange import __version__
 
 
 def test_version() -> None:

@@ -1,7 +1,7 @@
 [project]
-name = "pyproject"
+name = "faststream-monitoring"
 version = "0.1.0"
-description = "Minimal infrastructure settings for a quick start of a python project."
+description = "Example of monitoring settings for FastStream."
 requires-python = ">=3.12"
 readme = "README.md"
 authors = [
