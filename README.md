@@ -14,16 +14,20 @@
 
 The example consists of three services and demonstrates support for distributed tracing.
 
-1. Copy configs
+1. Clone project
+```shell
+git clone https://github.com/draincoder/faststream-monitoring.git
+```
+2. Copy configs
 ```shell
 cp .env.template .env && cp config/config.template.toml config/config.toml
 ```
-2. Start application
+3. Start application
 ```shell
-just up
+docker compose --profile exchange --profile grafana up --build -d
 ```
-3. Open **Grafana** on `http://127.0.0.1:3000` with login `admin` and password `admin`
-4. Go to **Explore** - **Tempo**
-5. Enter TraceQL query `{}`
+4. Open **Grafana** on `http://127.0.0.1:3000` with login `admin` and password `admin`
+5. Go to **Explore** - **Tempo**
+6. Enter TraceQL query `{}`
 
 ![Trace example](https://imgur.com/EziQgpy.png)
