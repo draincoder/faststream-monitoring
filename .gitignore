@@ -56,7 +56,6 @@ docs/_build/
 __pypackages__/
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -75,6 +74,3 @@ dmypy.json
 # IDE
 .idea/
 .vscode/
-
-# config
-config/config.toml
