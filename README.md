@@ -14,12 +14,16 @@
 
 The example consists of three services and demonstrates support for distributed tracing.
 
-1. Start application
+1. Copy configs
+```shell
+cp .env.template .env && cp config/config.template.toml config/config.toml
+```
+2. Start application
 ```shell
 just up
 ```
-2. Open **Grafana** on `http://127.0.0.1:3000` with login `admin` and password `admin`
-3. Go to **Explore** - **Tempo**
-4. Enter TraceQL query `{}`
+3. Open **Grafana** on `http://127.0.0.1:3000` with login `admin` and password `admin`
+4. Go to **Explore** - **Tempo**
+5. Enter TraceQL query `{}`
 
 ![Trace example](https://imgur.com/EziQgpy.png)
