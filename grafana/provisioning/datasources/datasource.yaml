@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - uid: tempo
+    orgId: 1
+    name: Tempo
+    type: tempo
+    typeName: Tempo
+    access: proxy
+    url: http://example.tempo
+    password: ""
+    user: ""
+    database: ""
+    basicAuth: false
+    isDefault: false
+    readOnly: false
+    editable: true

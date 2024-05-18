@@ -11,11 +11,17 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
 ]
-dependencies = []
+dependencies = [
+    "faststream @ git+https://github.com/draincoder/faststream.git@opentelemetry",
+    "opentelemetry-sdk>=1.24.0",
+    "opentelemetry-exporter-otlp>=1.24.0",
+    "adaptix>=3.0.0b5",
+    "aio-pika>=9.4.1",
+]
 
 [project.urls]
-"Source" = "https://github.com/draincoder/pyproject"
-"Homepage" = "https://github.com/draincoder/pyproject"
+"Source" = "https://github.com/draincoder/faststream-monitoring"
+"Homepage" = "https://github.com/draincoder/faststream-monitoring"
 
 [build-system]
 requires = ["setuptools>=61", "wheel"]
@@ -58,6 +64,9 @@ lint.ignore = [
     "RET505",
     "ISC001",
     "UP035",
+    "COM812",
+    "PTH123",
+    "S311",
 ]
 
 [tool.ruff.lint.per-file-ignores]

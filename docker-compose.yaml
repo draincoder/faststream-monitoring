@@ -1,0 +1,130 @@
+services:
+  order:
+    profiles: [ "exchange" ]
+    container_name: example.order
+    build:
+      context: .
+    restart: unless-stopped
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    networks:
+      - example.grafana.network
+      - example.rabbit.network
+    volumes:
+      - ./config:/app/config:ro
+    environment:
+      - CONFIG_PATH=$CONFIG_PATH
+    command: [ "python", "-m", "exchange.order_service.main" ]
+
+  trade:
+    profiles: [ "exchange" ]
+    container_name: example.trade
+    build:
+      context: .
+    restart: unless-stopped
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    networks:
+      - example.grafana.network
+      - example.rabbit.network
+    volumes:
+      - ./config:/app/config:ro
+    environment:
+      - CONFIG_PATH=$CONFIG_PATH
+    command: [ "python", "-m", "exchange.trade_service.main" ]
+
+  notification:
+    profiles: [ "exchange" ]
+    container_name: example.notification
+    build:
+      context: .
+    restart: unless-stopped
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    networks:
+      - example.grafana.network
+      - example.rabbit.network
+    volumes:
+      - ./config:/app/config:ro
+    environment:
+      - CONFIG_PATH=$CONFIG_PATH
+    command: [ "python", "-m", "exchange.notification_service.main" ]
+
+  rabbit:
+    profiles: [ "exchange" ]
+    image: rabbitmq:3.11-management-alpine
+    container_name: example.rabbit
+    hostname: example.rabbit
+    restart: unless-stopped
+    expose:
+      - "5672"
+      - "15672"
+    ports:
+      - "127.0.0.1:5671:5671"
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+    networks:
+      - example.rabbit.network
+    volumes:
+      - example.rabbit.data:/var/lib/rabbitmq/:rw
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-admin}
+    healthcheck:
+      test: [ "CMD-SHELL", "rabbitmq-diagnostics check_running -q" ]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 10s
+
+  grafana:
+    profiles: [ "grafana" ]
+    image: grafana/grafana:latest
+    container_name: example.grafana
+    hostname: example.grafana
+    restart: unless-stopped
+    expose:
+      - "3000"
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - example.grafana.network
+    volumes:
+      - example.grafana.data:/var/lib/grafana:rw
+      - ./grafana/provisioning:/etc/grafana/provisioning:rw
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_DATABASE_WAL=true
+      - VIRTUAL_HOST=example.grafana
+      - NETWORK_ACCESS=internal
+      - VIRTUAL_PORT=3000
+
+  tempo:
+    profiles: [ "grafana" ]
+    image: grafana/tempo:2.0.1
+    container_name: example.tempo
+    hostname: example.tempo
+    command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
+    restart: unless-stopped
+    ports:
+      - "14250:14250"
+      - "4317:4317"
+    expose:
+      - "14250"
+      - "4317"
+    networks:
+      - example.grafana.network
+
+volumes:
+  example.grafana.data: {}
+  example.rabbit.data: {}
+
+
+networks:
+  example.grafana.network: {}
+  example.rabbit.network: {}
