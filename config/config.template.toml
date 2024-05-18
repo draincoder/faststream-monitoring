@@ -1,8 +1,0 @@
-[rabbit]
-user = "admin"
-password = "admin"
-port = 5672
-host = "example.rabbit"
-
-[trace]
-otlp_endpoint = "http://example.tempo:4317"
