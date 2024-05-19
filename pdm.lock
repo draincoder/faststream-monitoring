@@ -5,7 +5,7 @@
 groups = ["default", "lint", "test"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:3d1b0e77d1544913bca0996f48445cd26b54b25f773815954733f5a4370466e9"
+content_hash = "sha256:d21c2c8a8908dd7a74b17c11e1baa5cfaad5e68f39b0186851f25238ef4fddd8"
 
 [[package]]
 name = "adaptix"
@@ -235,11 +235,8 @@ files = [
 
 [[package]]
 name = "faststream"
-version = "0.5.5"
+version = "0.5.7"
 requires_python = ">=3.8"
-git = "https://github.com/draincoder/faststream.git"
-ref = "opentelemetry"
-revision = "5e1d770ca394b500d0af7530c8025f32cd7d70c3"
 summary = "FastStream: the simplest way to work with a messaging queues"
 groups = ["default"]
 dependencies = [
@@ -247,6 +244,27 @@ dependencies = [
     "fast-depends<2.5.0,>=2.4.0b0",
     "typer!=0.12,<1,>=0.9",
     "typing-extensions>=4.8.0",
+]
+files = [
+    {file = "faststream-0.5.7-py3-none-any.whl", hash = "sha256:42f1de53c9dd629dd5935274b9a9a5634b4ab3fc3b7ba2ec438e70629eec3ea3"},
+    {file = "faststream-0.5.7.tar.gz", hash = "sha256:7e41a667f8d9bd74a6e927d7dfdcb11a74320eeb90ca59d02cb7f87db9335fe2"},
+]
+
+[[package]]
+name = "faststream"
+version = "0.5.7"
+extras = ["otel", "rabbit"]
+requires_python = ">=3.8"
+summary = "FastStream: the simplest way to work with a messaging queues"
+groups = ["default"]
+dependencies = [
+    "aio-pika<10,>=9",
+    "faststream==0.5.7",
+    "opentelemetry-sdk<2.0.0,>=1.24.0",
+]
+files = [
+    {file = "faststream-0.5.7-py3-none-any.whl", hash = "sha256:42f1de53c9dd629dd5935274b9a9a5634b4ab3fc3b7ba2ec438e70629eec3ea3"},
+    {file = "faststream-0.5.7.tar.gz", hash = "sha256:7e41a667f8d9bd74a6e927d7dfdcb11a74320eeb90ca59d02cb7f87db9335fe2"},
 ]
 
 [[package]]

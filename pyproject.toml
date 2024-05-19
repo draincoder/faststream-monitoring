@@ -12,11 +12,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "faststream @ git+https://github.com/draincoder/faststream.git@opentelemetry",
-    "opentelemetry-sdk>=1.24.0",
     "opentelemetry-exporter-otlp>=1.24.0",
     "adaptix>=3.0.0b5",
-    "aio-pika>=9.4.1",
+    "faststream[otel,rabbit]>=0.5.7",
 ]
 
 [project.urls]
