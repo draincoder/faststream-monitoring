@@ -12,7 +12,15 @@
 
 ## Example of monitoring settings for FastStream
 
-The example consists of three services and demonstrates support for distributed tracing.
+[FastStream OpenTelemetry documentation](https://faststream.airt.ai/latest/getting-started/opentelemetry/)
+
+* Three **FastStream** services
+* Exporting traces to **Grafana Tempo** via **gRPC**
+* Visualization of traces via **Grafana**
+* Examples with custom spans
+* Configured **docker-compose** with the entire infrastructure
+
+## How to run the example
 
 1. Clone project
 ```shell
