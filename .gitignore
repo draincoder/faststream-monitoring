@@ -74,3 +74,4 @@ dmypy.json
 # IDE
 .idea/
 .vscode/
+tempo-data/

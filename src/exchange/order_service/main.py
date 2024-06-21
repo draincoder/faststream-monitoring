@@ -25,9 +25,11 @@ async def main() -> None:
 
     @app.after_startup
     async def after_startup() -> None:
-        await broker.publish(Order(symbol="AAPL", quantity=10, type=Direction.BUY), "orders")
-        await broker.publish(Order(symbol="AAPL", quantity=5, type=Direction.BUY), "orders")
-        await broker.publish(Order(symbol="AAPL", quantity=1, type=Direction.BUY), "orders")
+        while True:
+            await broker.publish(Order(symbol="AAPL", quantity=10, type=Direction.BUY), "orders")
+            await broker.publish(Order(symbol="AAPL", quantity=5, type=Direction.BUY), "orders")
+            await broker.publish(Order(symbol="AAPL", quantity=1, type=Direction.BUY), "orders")
+            await asyncio.sleep(0.2)
 
     await app.run()
 

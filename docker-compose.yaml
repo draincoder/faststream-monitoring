@@ -104,19 +104,54 @@ services:
       - NETWORK_ACCESS=internal
       - VIRTUAL_PORT=3000
 
+  init:
+    profiles: [ "grafana" ]
+    container_name: example.tempo-init
+    hostname: example.tempo-init
+    image: &tempoImage grafana/tempo:latest
+    user: root
+    entrypoint:
+      - "chown"
+      - "10001:10001"
+      - "/var/tempo"
+    volumes:
+      - ./tempo-data:/var/tempo
+
   tempo:
     profiles: [ "grafana" ]
-    image: grafana/tempo:2.0.1
+    image: *tempoImage
     container_name: example.tempo
     hostname: example.tempo
-    command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+      - ./tempo-data:/var/tempo
     restart: unless-stopped
     ports:
       - "14250:14250"
       - "4317:4317"
+      - "3200:3200"
     expose:
       - "14250"
       - "4317"
+      - "3200"
+    networks:
+      - example.grafana.network
+    depends_on:
+      - init
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: example.prometheus
+    hostname: example.prometheus
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=exemplar-storage
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus.yaml
+    ports:
+      - "9090:9090"
     networks:
       - example.grafana.network
 
