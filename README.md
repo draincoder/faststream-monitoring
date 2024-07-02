@@ -1,6 +1,6 @@
 <div align="center">
 
-# FastStream Monitoring Example
+# [FastStream](https://github.com/airtai/faststream) Monitoring Example
 
 [![python](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/)
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm-project.org)
@@ -14,7 +14,7 @@
 
 [FastStream OpenTelemetry documentation](https://faststream.airt.ai/latest/getting-started/opentelemetry/)
 
-* Three **FastStream** services
+* Three [**FastStream**](https://github.com/airtai/faststream) services
 * Exporting traces to **Grafana Tempo** via **gRPC**
 * Visualization of traces via **Grafana**
 * Examples with custom spans
