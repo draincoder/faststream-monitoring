@@ -104,28 +104,15 @@ services:
       - NETWORK_ACCESS=internal
       - VIRTUAL_PORT=3000
 
-  init:
-    profiles: [ "grafana" ]
-    container_name: example.tempo-init
-    hostname: example.tempo-init
-    image: &tempoImage grafana/tempo:latest
-    user: root
-    entrypoint:
-      - "chown"
-      - "10001:10001"
-      - "/var/tempo"
-    volumes:
-      - ./tempo-data:/var/tempo
-
   tempo:
     profiles: [ "grafana" ]
-    image: *tempoImage
+    image: grafana/tempo:latest
     container_name: example.tempo
     hostname: example.tempo
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
+      - example.tempo.data:/var/tempo
       - ./tempo/tempo.yaml:/etc/tempo.yaml
-      - ./tempo-data:/var/tempo
     restart: unless-stopped
     ports:
       - "14250:14250"
@@ -137,8 +124,6 @@ services:
       - "3200"
     networks:
       - example.grafana.network
-    depends_on:
-      - init
 
   prometheus:
     image: prom/prometheus:latest
@@ -158,6 +143,7 @@ services:
 volumes:
   example.grafana.data: {}
   example.rabbit.data: {}
+  example.tempo.data: {}
 
 
 networks:
