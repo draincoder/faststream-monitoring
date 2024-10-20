@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import random
 from decimal import Decimal
@@ -21,6 +22,7 @@ async def trades_handler(trade: Trade) -> str:
         price = Decimal(random.randint(1000, 1500))
         trade.price = price
         trade.status = Status.SUBMITTED
+        await asyncio.sleep(random.randint(1, 50) / 10)
 
     message = f"Order [{trade.order}] was executed at the asset price {trade.price}$"
     logging.info(message)

@@ -12,11 +12,14 @@
 
 ## Example of monitoring settings for FastStream
 
-[FastStream OpenTelemetry documentation](https://faststream.airt.ai/latest/getting-started/opentelemetry/)
+[FastStream OpenTelemetry documentation](https://faststream.airt.ai/latest/getting-started/opentelemetry/)\
+[FastStream Prometheus documentation](https://faststream.airt.ai/latest/getting-started/prometheus/)
 
 * Three [**FastStream**](https://github.com/airtai/faststream) services
 * Exporting traces to **Grafana Tempo** via **gRPC**
 * Visualization of traces via **Grafana**
+* Collecting metrics and exporting using **Prometheus**
+* [**Grafana dashboard**](https://grafana.com/grafana/dashboards/22130-faststream-metrics/) for metrics
 * Examples with custom spans
 * Configured **docker-compose** with the entire infrastructure
 
@@ -33,5 +36,7 @@ docker compose --profile exchange --profile grafana up --build -d
 3. Open **Grafana** on `http://127.0.0.1:3000` with login `admin` and password `admin`
 4. Go to **Explore** - **Tempo**
 5. Enter TraceQL query `{}`
+6. Go to **Dashboards** - **FastStream Metrics**
 
 ![Trace example](https://imgur.com/EziQgpy.png)
+![Metrics example](https://imgur.com/J0aGEFB.png)

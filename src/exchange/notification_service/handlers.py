@@ -12,8 +12,7 @@ router = RabbitRouter()
 
 async def send_notification(text: str) -> None:
     with tracer.start_as_current_span("send notification", attributes={"text": text}):
-        sleep = random.randint(1, 5) / 100
-        await asyncio.sleep(sleep)
+        await asyncio.sleep(random.randint(1, 50) / 10)
 
     logger.info("Notification sent successfully")
 

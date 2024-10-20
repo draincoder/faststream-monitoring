@@ -14,7 +14,11 @@ classifiers = [
 dependencies = [
     "opentelemetry-exporter-otlp>=1.24.0",
     "adaptix>=3.0.0b5",
-    "faststream[otel,rabbit]>=0.5.7",
+    "faststream @ git+https://github.com/roma-frolov/faststream.git@feat/prometheus",
+    "aio-pika>=9.4.3",
+    "opentelemetry-sdk>=1.27.0",
+    "prometheus-client>=0.21.0",
+    "uvicorn>=0.32.0",
 ]
 
 [project.urls]
@@ -65,6 +69,7 @@ lint.ignore = [
     "COM812",
     "PTH123",
     "S311",
+    "S104",
 ]
 
 [tool.ruff.lint.per-file-ignores]

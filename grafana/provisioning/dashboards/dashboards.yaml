@@ -1,0 +1,10 @@
+apiVersion: 1
+
+providers:
+- name: "FastStream"
+  orgId: 1
+  type: "file"
+  disableDeletion: true
+  editable: true
+  options:
+    path: "/etc/grafana/dashboards/faststream.json"

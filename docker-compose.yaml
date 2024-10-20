@@ -2,6 +2,7 @@ services:
   order:
     profiles: [ "exchange" ]
     container_name: example.order
+    hostname: example.order
     build:
       context: .
     restart: unless-stopped
@@ -20,6 +21,7 @@ services:
   trade:
     profiles: [ "exchange" ]
     container_name: example.trade
+    hostname: example.trade
     build:
       context: .
     restart: unless-stopped
@@ -38,6 +40,7 @@ services:
   notification:
     profiles: [ "exchange" ]
     container_name: example.notification
+    hostname: example.notification
     build:
       context: .
     restart: unless-stopped
@@ -95,6 +98,7 @@ services:
     volumes:
       - example.grafana.data:/var/lib/grafana:rw
       - ./grafana/provisioning:/etc/grafana/provisioning:rw
+      - ./grafana/dashboards:/etc/grafana/dashboards
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}

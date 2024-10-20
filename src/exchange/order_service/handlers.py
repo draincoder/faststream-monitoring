@@ -1,4 +1,6 @@
+import asyncio
 import logging
+import random
 
 from faststream.rabbit import RabbitRouter
 from opentelemetry import trace
@@ -17,6 +19,7 @@ async def orders_handler(order: Order) -> Trade:
     logging.info("Received order [%s]", order)
 
     with tracer.start_as_current_span("validate order", attributes={"quantity": order.quantity}):
+        await asyncio.sleep(random.randint(1, 50) / 10)
         if order.quantity <= 0:
             raise ValueError("Order quantity must be greater than zero")
 
