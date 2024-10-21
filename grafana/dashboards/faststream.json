@@ -150,7 +150,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", destination=~\"$destination\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", destination=~\"$destination\"} [$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -216,7 +216,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", status=\"success\", destination=~\"$destination\"} [$interval])",
+          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", status=\"success\", destination=~\"$destination\"} [$__range])",
           "interval": "",
           "legendFormat": "{{destination}}",
           "range": true,
@@ -281,7 +281,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_total\", handler=~\"$handler\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_total\", handler=~\"$handler\"} [$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -345,7 +345,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"} [$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -409,7 +409,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"acked\", handler=~\"$handler\"} [$interval])",
+          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"acked\", handler=~\"$handler\"} [$__range])",
           "interval": "",
           "legendFormat": "{{handler}}",
           "refId": "A"
@@ -479,7 +479,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_exceptions_total\", destination=~\"$destination\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_exceptions_total\", destination=~\"$destination\"} [$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -619,7 +619,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_exceptions_total\", handler=~\"$handler\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_exceptions_total\", handler=~\"$handler\"} [$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -1632,7 +1632,7 @@
               "exemplar": true,
               "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=~\"nacked|rejected|skipped\", handler=~\"$handler\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"})",
               "interval": "",
-              "legendFormat": "{{handler}} [{{status}}]",
+              "legendFormat": "{{handler}}",
               "refId": "A"
             }
           ],
@@ -1671,6 +1671,27 @@
         "type": "datasource"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "faststream",
+          "value": "faststream"
+        },
+        "description": "The prefix of metrics that is specified in PrometheusMiddleware",
+        "hide": 0,
+        "label": "Metrics Prefix",
+        "name": "metrics_prefix",
+        "options": [
+          {
+            "selected": true,
+            "text": "faststream",
+            "value": "faststream"
+          }
+        ],
+        "query": "faststream",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
         "allValue": ".+",
         "current": {
           "selected": false,
@@ -1699,27 +1720,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "faststream",
-          "value": "faststream"
-        },
-        "description": "The prefix of metrics that is specified in PrometheusMiddleware",
-        "hide": 0,
-        "label": "Metrics Prefix",
-        "name": "metrics_prefix",
-        "options": [
-          {
-            "selected": true,
-            "text": "faststream",
-            "value": "faststream"
-          }
-        ],
-        "query": "faststream",
-        "skipUrlSync": false,
-        "type": "textbox"
       },
       {
         "allValue": ".+",
@@ -1780,77 +1780,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
-      },
-      {
-        "auto": true,
-        "auto_count": 30,
-        "auto_min": "10s",
-        "current": {
-          "selected": false,
-          "text": "15m",
-          "value": "15m"
-        },
-        "description": "Interval",
-        "hide": 0,
-        "label": "Interval",
-        "name": "interval",
-        "options": [
-          {
-            "selected": false,
-            "text": "auto",
-            "value": "$__auto_interval_interval"
-          },
-          {
-            "selected": false,
-            "text": "5m",
-            "value": "5m"
-          },
-          {
-            "selected": true,
-            "text": "15m",
-            "value": "15m"
-          },
-          {
-            "selected": false,
-            "text": "1h",
-            "value": "1h"
-          },
-          {
-            "selected": false,
-            "text": "6h",
-            "value": "6h"
-          },
-          {
-            "selected": false,
-            "text": "12h",
-            "value": "12h"
-          },
-          {
-            "selected": false,
-            "text": "24h",
-            "value": "24h"
-          },
-          {
-            "selected": false,
-            "text": "2d",
-            "value": "2d"
-          },
-          {
-            "selected": false,
-            "text": "7d",
-            "value": "7d"
-          },
-          {
-            "selected": false,
-            "text": "30d",
-            "value": "30d"
-          }
-        ],
-        "query": "5m,15m,1h,6h,12h,24h,2d,7d,30d",
-        "queryValue": "",
-        "refresh": 2,
-        "skipUrlSync": false,
-        "type": "interval"
       }
     ]
   },
@@ -1886,6 +1815,6 @@
   "timezone": "",
   "title": "FastStream Metrics",
   "uid": "faststream",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
