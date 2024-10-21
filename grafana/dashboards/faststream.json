@@ -150,7 +150,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", destination=~\"$destination\"} [$interval]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -216,7 +216,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", status=\"success\"} [$interval])",
+          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", status=\"success\", destination=~\"$destination\"} [$interval])",
           "interval": "",
           "legendFormat": "{{destination}}",
           "range": true,
@@ -281,7 +281,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_total\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_total\", handler=~\"$handler\"} [$interval]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -345,7 +345,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"} [$interval]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -409,7 +409,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"acked\"} [$interval])",
+          "expr": "increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"acked\", handler=~\"$handler\"} [$interval])",
           "interval": "",
           "legendFormat": "{{handler}}",
           "refId": "A"
@@ -479,7 +479,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_exceptions_total\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_exceptions_total\", destination=~\"$destination\"} [$interval]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -548,7 +548,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "{app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_duration_seconds_sum\"} / {app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_duration_seconds_count\"}",
+          "expr": "{app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_duration_seconds_sum\", destination=~\"$destination\"} / {app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_duration_seconds_count\", destination=~\"$destination\"}",
           "interval": "",
           "legendFormat": "{{destination}}",
           "refId": "A"
@@ -619,7 +619,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_exceptions_total\"} [$interval]))",
+          "expr": "sum(increase({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_exceptions_total\", handler=~\"$handler\"} [$interval]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -691,7 +691,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "sum({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_in_process\"})",
+          "expr": "sum({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_in_process\", handler=~\"$handler\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -760,7 +760,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "{app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_duration_seconds_sum\"} / {app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_duration_seconds_count\"}",
+          "expr": "{app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_duration_seconds_sum\", handler=~\"$handler\"} / {app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_duration_seconds_count\", handler=~\"$handler\"}",
           "interval": "",
           "legendFormat": "{{handler}}",
           "refId": "A"
@@ -857,7 +857,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\"} [1m])",
+          "expr": "rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_total\", destination=~\"$destination\"} [1m])",
           "interval": "",
           "legendFormat": "{{destination}} [{{status}}]",
           "refId": "A"
@@ -951,7 +951,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\"} [1m])",
+          "expr": "rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"} [1m])",
           "interval": "",
           "legendFormat": "{{handler}} [{{status}}]",
           "refId": "A"
@@ -1044,7 +1044,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "{app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_in_process\"}",
+          "expr": "{app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_in_process\", handler=~\"$handler\"}",
           "interval": "",
           "legendFormat": "{{handler}}",
           "refId": "A"
@@ -1138,7 +1138,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "histogram_quantile(.99,sum(rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_duration_seconds_bucket\"} [1m])) by(destination, le))",
+          "expr": "histogram_quantile(.99,sum(rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_published_messages_duration_seconds_bucket\", destination=~\"$destination\"} [1m])) by(destination, le))",
           "interval": "",
           "legendFormat": "{{destination}}",
           "refId": "A"
@@ -1236,7 +1236,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "histogram_quantile(.99,sum(rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_duration_seconds_bucket\"} [1m])) by(handler, le))",
+          "expr": "histogram_quantile(.99,sum(rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_duration_seconds_bucket\", handler=~\"$handler\"} [1m])) by(handler, le))",
           "interval": "",
           "legendFormat": "{{handler}}",
           "refId": "A"
@@ -1330,7 +1330,7 @@
             "uid": "$datasource"
           },
           "exemplar": true,
-          "expr": "histogram_quantile(.99,sum(rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_size_bytes_bucket\"} [1m])) by(handler, le))",
+          "expr": "histogram_quantile(.99,sum(rate({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_messages_size_bytes_bucket\", handler=~\"$handler\"} [1m])) by(handler, le))",
           "interval": "",
           "legendFormat": "{{handler}}",
           "refId": "A"
@@ -1442,9 +1442,9 @@
                 "uid": "$datasource"
               },
               "exemplar": true,
-              "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"acked\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\"})",
+              "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"acked\", handler=~\"$handler\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"})",
               "interval": "",
-              "legendFormat": "{{path}}",
+              "legendFormat": "{{handler}}",
               "refId": "A"
             }
           ],
@@ -1536,9 +1536,9 @@
                 "uid": "$datasource"
               },
               "exemplar": true,
-              "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"error\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\"})",
+              "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=\"error\", handler=~\"$handler\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"})",
               "interval": "",
-              "legendFormat": "{{path}}",
+              "legendFormat": "{{handler}}",
               "refId": "A"
             }
           ],
@@ -1630,9 +1630,9 @@
                 "uid": "$datasource"
               },
               "exemplar": true,
-              "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=~\"nacked|rejected|skipped\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\"})",
+              "expr": "sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", status=~\"nacked|rejected|skipped\", handler=~\"$handler\"}) / sum by(handler) ({app_name=~\"$app_name\", __name__=~\"${metrics_prefix}_received_processed_messages_total\", handler=~\"$handler\"})",
               "interval": "",
-              "legendFormat": "{{path}} [{{status}}]",
+              "legendFormat": "{{handler}} [{{status}}]",
               "refId": "A"
             }
           ],
@@ -1671,16 +1671,17 @@
         "type": "datasource"
       },
       {
+        "allValue": ".+",
         "current": {
           "selected": false,
           "text": "All",
-          "value": "$__all"
+          "value": ".+"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "$datasource"
         },
-        "definition": "label_values(app_name)",
+        "definition": "label_values({__name__=~\"${metrics_prefix}_published_messages_total|${metrics_prefix}_received_messages_total\"},app_name)",
         "description": "The name of the application that is specified in PrometheusMiddleware",
         "hide": 0,
         "includeAll": true,
@@ -1719,6 +1720,66 @@
         "query": "faststream",
         "skipUrlSync": false,
         "type": "textbox"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": false,
+          "text":  "All",
+          "value": ".+"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values({__name__=~\"${metrics_prefix}_published_messages_total\", app_name=~\"$app_name\"},destination)",
+        "description": "Destination",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Destination",
+        "multi": true,
+        "name": "destination",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values({__name__=~\"${metrics_prefix}_published_messages_total\", app_name=~\"$app_name\"},destination)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+       "allValue": ".+",
+        "current": {
+          "selected": false,
+          "text":  "All",
+          "value": ".+"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values({__name__=~\"${metrics_prefix}_received_messages_total\", app_name=~\"$app_name\"},handler)",
+        "description": "Handler",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Handler",
+        "multi": true,
+        "name": "handler",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values({__name__=~\"${metrics_prefix}_received_messages_total\", app_name=~\"$app_name\"},handler)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
       },
       {
         "auto": true,
@@ -1825,6 +1886,6 @@
   "timezone": "",
   "title": "FastStream Metrics",
   "uid": "faststream",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
