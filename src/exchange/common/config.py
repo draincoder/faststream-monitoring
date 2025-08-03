@@ -1,7 +1,7 @@
 import os
 import tomllib
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 
 from adaptix import Retort
 
@@ -40,4 +40,4 @@ def load_config() -> Config:
     path = os.getenv("CONFIG_PATH", DEFAULT_CONFIG_PATH)
     data = read_toml(path)
     mapper = Retort()
-    return mapper.load(data, Config)
+    return cast("Config", mapper.load(data, Config))

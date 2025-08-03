@@ -16,7 +16,7 @@ router = RabbitRouter()
 @router.publisher("trades")
 @router.subscriber("orders")
 async def orders_handler(order: Order) -> Trade:
-    logging.info("Received order [%s]", order)
+    logger.info("Received order [%s]", order)
 
     with tracer.start_as_current_span("validate order", attributes={"quantity": order.quantity}):
         await asyncio.sleep(random.randint(1, 50) / 10)

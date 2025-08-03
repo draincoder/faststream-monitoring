@@ -12,10 +12,10 @@
 
 ## Example of monitoring settings for FastStream
 
-[FastStream OpenTelemetry documentation](https://faststream.airt.ai/latest/getting-started/opentelemetry/)\
-[FastStream Prometheus documentation](https://faststream.airt.ai/latest/getting-started/prometheus/)
+[FastStream OpenTelemetry documentation](https://faststream.ag2.ai/latest/getting-started/observability/opentelemetry/)\
+[FastStream Prometheus documentation](https://faststream.ag2.ai/latest/getting-started/observability/prometheus/)
 
-* Three [**FastStream**](https://github.com/airtai/faststream) services
+* Three [**FastStream**](https://github.com/ag2ai/faststream) services
 * Exporting traces to **Grafana Tempo** via **gRPC**
 * Visualization of traces via **Grafana**
 * Collecting metrics and exporting using **Prometheus**

@@ -16,7 +16,7 @@ router = RabbitRouter()
 @router.publisher("notifications")
 @router.subscriber("trades")
 async def trades_handler(trade: Trade) -> str:
-    logging.info("Received trade [%s]", trade)
+    logger.info("Received trade [%s]", trade)
 
     with tracer.start_as_current_span("process trade"):
         price = Decimal(random.randint(1000, 1500))
@@ -25,6 +25,6 @@ async def trades_handler(trade: Trade) -> str:
         await asyncio.sleep(random.randint(1, 50) / 10)
 
     message = f"Order [{trade.order}] was executed at the asset price {trade.price}$"
-    logging.info(message)
+    logger.info(message)
 
     return message

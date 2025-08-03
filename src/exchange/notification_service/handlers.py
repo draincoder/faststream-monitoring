@@ -19,5 +19,5 @@ async def send_notification(text: str) -> None:
 
 @router.subscriber("notifications")
 async def notifications_handler(message: str) -> None:
-    logging.info("Received message [%s]", message)
+    logger.info("Received message [%s]", message)
     await send_notification(message)

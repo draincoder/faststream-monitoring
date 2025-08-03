@@ -15,6 +15,7 @@ distributor:
     otlp:
       protocols:
         grpc:
+          endpoint: 0.0.0.0:4317
 
 ingester:
   max_block_duration: 5m

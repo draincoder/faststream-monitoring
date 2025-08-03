@@ -9,6 +9,8 @@ services:
     depends_on:
       rabbit:
         condition: service_healthy
+      tempo:
+        condition: service_started
     networks:
       - example.grafana.network
       - example.rabbit.network
@@ -28,6 +30,8 @@ services:
     depends_on:
       rabbit:
         condition: service_healthy
+      tempo:
+        condition: service_started
     networks:
       - example.grafana.network
       - example.rabbit.network
@@ -47,6 +51,8 @@ services:
     depends_on:
       rabbit:
         condition: service_healthy
+      tempo:
+        condition: service_started
     networks:
       - example.grafana.network
       - example.rabbit.network
@@ -62,13 +68,10 @@ services:
     container_name: example.rabbit
     hostname: example.rabbit
     restart: unless-stopped
-    expose:
-      - "5672"
-      - "15672"
     ports:
-      - "127.0.0.1:5671:5671"
-      - "127.0.0.1:5672:5672"
-      - "127.0.0.1:15672:15672"
+      - "5671:5671"
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - example.rabbit.network
     volumes:
@@ -85,14 +88,12 @@ services:
 
   grafana:
     profiles: [ "grafana" ]
-    image: grafana/grafana:latest
+    image: grafana/grafana:12.0.0
     container_name: example.grafana
     hostname: example.grafana
     restart: unless-stopped
-    expose:
-      - "3000"
     ports:
-      - "127.0.0.1:3000:3000"
+      - "3000:3000"
     networks:
       - example.grafana.network
     volumes:
@@ -110,7 +111,7 @@ services:
 
   tempo:
     profiles: [ "grafana" ]
-    image: grafana/tempo:latest
+    image: grafana/tempo:2.8.1
     container_name: example.tempo
     hostname: example.tempo
     command: [ "-config.file=/etc/tempo.yaml" ]
@@ -122,15 +123,11 @@ services:
       - "14250:14250"
       - "4317:4317"
       - "3200:3200"
-    expose:
-      - "14250"
-      - "4317"
-      - "3200"
     networks:
       - example.grafana.network
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v3.3.1
     container_name: example.prometheus
     hostname: example.prometheus
     command:
@@ -148,7 +145,6 @@ volumes:
   example.grafana.data: {}
   example.rabbit.data: {}
   example.tempo.data: {}
-
 
 networks:
   example.grafana.network: {}
