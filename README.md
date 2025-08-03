@@ -1,6 +1,6 @@
 <div align="center">
 
-# [FastStream](https://github.com/airtai/faststream) Monitoring Example
+# [FastStream](https://github.com/ag2ai/faststream) Monitoring Example
 
 [![python](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/)
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm-project.org)
