@@ -1,5 +1,5 @@
 # Use the official Python image as the base image
-FROM python:3.12.3-slim-bookworm as python-base
+FROM python:3.13.5-slim-bookworm as python-base
 
 # Set environment variables to non-interactive
 ENV PYTHONUNBUFFERED=1 \
